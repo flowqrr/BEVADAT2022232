@@ -108,20 +108,3 @@ def by_parity(input_list):
 # input parameters: input_dict
 def mean_key_value(input_dict):
     return {key: sum(value) / len(value) for key, value in input_dict.items()}
-
-
-print(subset([1, 2, 3, 4, 5, 6, 7, 8, ], 2, 5))
-print(every_nth([1, 2, 3, 4, 5, 6, 7, 8, ], 2))
-print(unique([1, 2, 3, 4, 5, 6, 7, 8, 8]))
-print(unique([1, 2, 3, 4, 5, 6, 7, 8]))
-print(flatten([[1, 2], [3, 4], [5, 6]]))
-print(merge_lists([1, 2], [3, 4], [5, 6]))
-print(reverse_tuples([(1, 2), (3, 4), (5, 6)]))
-print(remove_tuplicates([1, 2, 2, 2, 3, 4, 4, 5, 6, 6]))
-print(transpose([[1, 2], [3, 4], [5, 6]]))
-print(transpose([]))
-print(split_into_chunks([1, 2, 3, 4, 5, 6, 7, 8], 2))
-print(split_into_chunks([1, 2, 3, 4, 5, 6, 7, 8], 3))
-print(merge_dicts({1: 2, 2: 3, 3: 4, 4: 5}, {6: 7, 7: 8, 8: 9}))
-print(by_parity([1, 2, 3, 4, 5, 6, 7, 8, 8]))
-print(mean_key_value({"some_key": [1, 2, 3, 4], "another_key": [5, 6, 7, 8], "third_key": [90, 100, 110, 120]}))
