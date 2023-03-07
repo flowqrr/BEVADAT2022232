@@ -48,7 +48,7 @@ def bool_array(input_array: np.array) -> np.array:
 # Ki: [[ True False False], [ True  True  True], [False False False]]
 # invert_bool_array()
 def invert_bool_array(input_array: np.array) -> np.array:
-    return input_array != 1
+    return input_array == 0
 
 
 # Készíts egy olyan függvényt ami a paraméterként kapott array-t kilapítja
