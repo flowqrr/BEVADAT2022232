@@ -108,9 +108,21 @@ def add_border(input_array: np.array) -> np.array:
 # Be: '2023-03', '2023-04'
 # Ki: ['2023-03-01', '2023-03-02', .. , '2023-03-31',]
 # list_days()
-def list_days(start_date: str, end_date: str) -> list:
-    start = datetime.strptime(start_date, '%Y-%m')
-    end = datetime.strptime(end_date, '%Y-%m')
+def list_days(start_date: str, end_date: str) -> np.array:
+    days = np.arange(np.datetime64(start_date), np.datetime64(end_date), dtype='datetime64[D]')
+    return days
 
-print(list_days(['2023-03', '2023-04']))
 
+# Írj egy fügvényt ami vissza adja az aktuális dátumot az alábbi formában: YYYY-MM-DD
+# Be:
+# Ki: 2017-03-24
+def current_date() -> str:
+    return datetime.now().strftime('%Y-%m-%d')
+
+
+# Írj egy olyan függvényt ami visszadja, hogy mennyi másodperc telt el 1970 január 01. 00:00:00 óta.
+# Be:
+# Ki: másodpercben az idó, int-é kasztolva
+# sec_from_1970()
+def sec_from_1970() -> int:
+    return np.datetime64('now').astype('datetime64[s]').astype('int')
