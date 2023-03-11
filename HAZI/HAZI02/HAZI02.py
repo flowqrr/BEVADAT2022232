@@ -26,7 +26,7 @@ def compare_two_array(input_array1: np.array, input_array2: np.array) -> np.arra
 def get_array_shape(input_array: np.array) -> str:
     shape = input_array.shape
     if len(shape) == 1:
-        return f"sor: 0, oszlop: {shape[0]}, melyseg: 0"
+        return f"sor: 1, oszlop: {shape[0]}, melyseg: 0"
     elif len(shape) == 2:
         return f"sor: {shape[0]}, oszlop: {shape[1]}, melyseg: 1"
     elif len(shape) == 3:
