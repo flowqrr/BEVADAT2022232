@@ -24,9 +24,13 @@ def compare_two_array(input_array1: np.array, input_array2: np.array) -> np.arra
 # get_array_shape()
 # 3D-vel még műküdnie kell!
 def get_array_shape(input_array: np.array) -> str:
-    shape = np.array(input_array).shape
-    return f"sor: {shape[0]}, oszlop: {shape[1] if len(shape) >= 2 else 1}, melyseg: {shape[2] if len(shape) == 3 else 1}"
-
+    shape = input_array.shape
+    if len(shape) == 1:
+        return f"sor: 0, oszlop: {shape[0]}, melyseg: 0"
+    elif len(shape) == 2:
+        return f"sor: {shape[0]}, oszlop: {shape[1]}, melyseg: 1"
+    elif len(shape) == 3:
+        return f"sor: {shape[0]}, oszlop: {shape[1]}, melyseg: {shape[2]}"
 
 # Készíts egy olyan függvényt, aminek segítségével elő tudod állítani egy neurális hálózat tanításához szükséges Y-okat egy numpy array-ből.
 # Bementként add meg az array-t, illetve hogy mennyi class-od van. Kimenetként pedig adjon vissza egy 2d array-t, ahol a sorok az egyes elemek. Minden nullákkal teli legyen és csak ott álljon egyes, ahol a bementi tömb megjelöli
