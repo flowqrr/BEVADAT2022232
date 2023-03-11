@@ -81,7 +81,7 @@ def replace_by_value(input_array: np.array, input_value: int) -> np.array:
 # array_multi()
 # Ha több dimenziós a tömb, akkor az egész tömb elemeinek szorzatával térjen vissza
 def array_multi(input_array: np.array) -> np.array:
-    return np.prod(input_array, axis=0)
+    return np.prod(input_array)
 
 
 # Készítsd egy olyan függvényt, ami a 2D array értékeit összeszorozza és egy olyan array-el tér vissza, aminek az elemei a soroknak a szorzata
