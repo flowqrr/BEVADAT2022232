@@ -62,12 +62,15 @@ def decode_Y(input_array: np.array) -> np.array:
 def eval_classification(input_list: list, input_array: np.array):
     return input_list[np.argmax(input_array)]
 
+
 # Készíts egy olyan függvényt, ahol az 1D array-ben a páratlan számokat -1-re cseréli
 # Be: [1,2,3,4,5,6]
 # Ki: [-1,2,-1,4,-1,6]
 # repalce_odd_numbers()
-def repalce_odd_numbers(input_array: np.array) -> np.array:
-    return np.where(input_array % 2 != 0, -1, input_array)
+def replace_odd_numbers(input_array: np.array) -> np.array:
+    odds = input_array % 2 == 1
+    input_array[odds] = -1
+    return input_array
 
 
 # Készíts egy olyan függvényt, ami egy array értékeit -1 és 1-re változtatja, attól függően, hogy az adott elem nagyobb vagy kisebb a paraméterként megadott számnál.
