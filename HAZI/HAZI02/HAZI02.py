@@ -1,5 +1,3 @@
-from datetime import datetime
-
 import numpy as np
 
 
@@ -114,7 +112,8 @@ def list_days(start_date: str, end_date: str) -> np.array:
 # Be:
 # Ki: 2017-03-24
 def current_date() -> str:
-    return datetime.now().strftime('%Y-%m-%d')
+    now = np.datetime64('now')
+    return str(np.datetime_as_string(now, unit='D'))
 
 
 # Írj egy olyan függvényt ami visszadja, hogy mennyi másodperc telt el 1970 január 01. 00:00:00 óta.
