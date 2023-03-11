@@ -121,5 +121,5 @@ def current_date():
 # Ki: másodpercben az idó, int-é kasztolva
 # sec_from_1970()
 def sec_from_1970() -> int:
-    sec = (np.datetime64('now') - np.datetime64('1970-01-01 00:00:00')) / np.timedelta64(1, 's')
+    sec = (np.datetime64('now') - np.datetime64('1970-01-01 00:02:00')) / np.timedelta64(1, 's')
     return int(sec)
