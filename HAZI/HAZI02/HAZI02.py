@@ -88,8 +88,9 @@ def array_multi(input_array: np.array) -> np.array:
 # Be: [[1, 2], [3, 4]]
 # Ki: [2, 12]
 # array_multi_2d()
-def array_multi_2(input_array: np.array) -> np.array:
-    return np.product(input_array, axis=1)
+def array_multi_2d(input_array: np.array) -> np.array:
+    row_sums = np.apply_along_axis(np.prod, axis=1, arr=input_array)
+    return row_sums
 
 
 # Készíts egy olyan függvényt, amit egy meglévő numpy array-hez készít egy bordert nullásokkal. Bementként egy array-t várjon és kimenetként egy array jelenjen meg aminek van border-je
