@@ -18,9 +18,7 @@ def column_swap(input_array: np.array) -> np.array:
 # compare_two_array()
 # egyenlő elemszámúakra kell csak hogy működjön
 def compare_two_array(input_array1: np.array, input_array2: np.array) -> np.array:
-    if input_array1.shape == input_array2.shape:
-        return np.where(np.equal(input_array1, input_array2))[0]
-    return np.array([])
+    return np.where(input_array1 == input_array2)
 
 
 # Készíts egy olyan függvényt, ami vissza adja a megadott array dimenzióit:
@@ -30,8 +28,9 @@ def compare_two_array(input_array1: np.array, input_array2: np.array) -> np.arra
 # 3D-vel még műküdnie kell!
 def get_array_shape(input_array: np.array) -> str:
     shape = np.array(input_array).shape
-    return f"sor: {shape[0]}, oszlop: {shape[1]}, melyseg: {shape[2] if len(shape) == 3 else 1}"
+    return f"sor: {shape[0]}, oszlop: {shape[1] if len(shape) >= 2 else 1}, melyseg: {shape[2] if len(shape) == 3 else 1}"
 
+print(get_array_shape(np.array([])))
 
 # Készíts egy olyan függvényt, aminek segítségével elő tudod állítani egy neurális hálózat tanításához szükséges Y-okat egy numpy array-ből.
 # Bementként add meg az array-t, illetve hogy mennyi class-od van. Kimenetként pedig adjon vissza egy 2d array-t, ahol a sorok az egyes elemek. Minden nullákkal teli legyen és csak ott álljon egyes, ahol a bementi tömb megjelöli
