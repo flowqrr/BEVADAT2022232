@@ -8,8 +8,7 @@ import numpy as np
 # Ki: [[2,1],[4,3]]
 # column_swap()
 def column_swap(input_array: np.array) -> np.array:
-    return_array = np.array(input_array[:, [1, 0]])
-    return return_array
+    return input_array[:, ::-1]
 
 
 # Készíts egy olyan függvényt ami összehasonlít két array-t és adjon vissza egy array-ben, hogy hol egyenlőek
@@ -30,7 +29,6 @@ def get_array_shape(input_array: np.array) -> str:
     shape = np.array(input_array).shape
     return f"sor: {shape[0]}, oszlop: {shape[1] if len(shape) >= 2 else 1}, melyseg: {shape[2] if len(shape) == 3 else 1}"
 
-print(get_array_shape(np.array([])))
 
 # Készíts egy olyan függvényt, aminek segítségével elő tudod állítani egy neurális hálózat tanításához szükséges Y-okat egy numpy array-ből.
 # Bementként add meg az array-t, illetve hogy mennyi class-od van. Kimenetként pedig adjon vissza egy 2d array-t, ahol a sorok az egyes elemek. Minden nullákkal teli legyen és csak ott álljon egyes, ahol a bementi tömb megjelöli
