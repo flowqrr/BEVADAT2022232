@@ -23,7 +23,7 @@ def csv_to_df(csv_file: str) -> pd.core.frame.DataFrame:
     return df
 
 
-# df = csv_to_df('StudentsPerformance.csv')
+df = csv_to_df('StudentsPerformance.csv')
 # print(df)
 
 '''
@@ -139,7 +139,7 @@ def female_top_score(df_data) -> tuple:
     new_df = df_data.copy()
     female_df = new_df[new_df['gender'] == 'female']
     top_female = female_df.loc[(female_df[['math score', 'reading score', 'writing score']].sum(axis=1)).idxmax()]
-    return top_female
+    return (top_female['math score'], top_female['reading score'], top_female['writing score'])
 
 
 # print(female_top_score(df))
