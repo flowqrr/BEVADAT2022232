@@ -23,7 +23,7 @@ def csv_to_df(csv_file: str) -> pd.core.frame.DataFrame:
     return df
 
 
-df = csv_to_df('StudentsPerformance.csv')
+# df = csv_to_df('StudentsPerformance.csv')
 # print(df)
 
 '''
