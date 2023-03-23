@@ -39,7 +39,7 @@ függvény neve: capitalize_columns
 
 def capitalize_columns(df_data) -> pd.core.frame.DataFrame:
     new_df = df_data.copy()
-    new_columns = {col: col.upper() for col in df.columns if 'e' not in col}
+    new_columns = {col: col.upper() for col in new_df.columns if 'e' not in col}
     new_df.rename(columns=new_columns, inplace=True)
     return new_df
 
@@ -200,7 +200,7 @@ függvény neve: math_bar_plot
 def math_bar_plot(df_data) -> plt.Figure:
     new_df = df_data.copy()
     fig, ax = plt.subplots()
-    df.groupby('gender')['math score'].mean().plot(kind='bar', ax=ax)
+    new_df.groupby('gender')['math score'].mean().plot(kind='bar', ax=ax)
     ax.set_title('Average Math Score by Gender')
     ax.set_xlabel('Gender')
     ax.set_ylabel('Math Score')
