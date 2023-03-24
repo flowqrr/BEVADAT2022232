@@ -193,10 +193,11 @@ függvény neve: math_bar_plot
 '''
 
 # 9
-def math_bar_plot(df_data) -> plt.Figure:
+def math_bar_plot(df_data): # -> plt.Figure:
     new_df = df_data.copy()
     fig, ax = plt.subplots()
-    new_df.groupby('gender')['math score'].mean().plot(kind='bar', ax=ax)
+    new_df = new_df.groupby('gender')['math score'].mean()
+    ax.bar(new_df.index, new_df.values)
     ax.set_title('Average Math Score by Gender')
     ax.set_xlabel('Gender')
     ax.set_ylabel('Math Score')
