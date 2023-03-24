@@ -17,13 +17,13 @@ return type: pandas.core.frame.DataFrame
 függvény neve: csv_to_df
 '''
 
-
+# 1
 def csv_to_df(csv_file: str) -> pd.core.frame.DataFrame:
     df = pd.read_csv(csv_file)
     return df
 
 
-# df = csv_to_df('StudentsPerformance.csv')
+df = csv_to_df('StudentsPerformance.csv')
 # print(df)
 
 '''
@@ -36,7 +36,7 @@ return type: pandas.core.frame.DataFrame
 függvény neve: capitalize_columns
 '''
 
-
+# 2
 def capitalize_columns(df_data) -> pd.core.frame.DataFrame:
     new_df = df_data.copy()
     new_columns = {col: col.upper() for col in new_df.columns if 'e' not in col}
@@ -56,7 +56,7 @@ return type: int
 függvény neve: math_passed_count
 '''
 
-
+# 3
 def math_passed_count(df_data) -> int:
     new_df = df_data.copy()
     return len(new_df[new_df['math score'] >= 50])
@@ -73,7 +73,7 @@ return type: pandas.core.frame.DataFrame
 függvény neve: did_pre_course
 '''
 
-
+# 4
 def did_pre_course(df_data) -> pd.core.frame.DataFrame:
     new_df = df_data.copy()
     return new_df[new_df['test preparation course'] != 'none']
@@ -91,14 +91,11 @@ return type: pandas.core.frame.DataFrame
 függvény neve: average_scores
 '''
 
-
+# 5
 def average_scores(df_data) -> pd.core.frame.DataFrame:
     new_df = df_data.copy()
     df_average_scores = new_df.groupby('parental level of education')[
         ['math score', 'reading score', 'writing score']].mean()
-    df_average_scores['exam score'] = (df_average_scores['math score'] + df_average_scores['reading score'] +
-                                       df_average_scores['writing score']) / 3
-    df_average_scores.drop(['math score', 'reading score', 'writing score'], axis=1, inplace=True)
     return df_average_scores
 
 
@@ -114,7 +111,7 @@ return type: pandas.core.frame.DataFrame
 függvény neve: add_age
 '''
 
-
+# 6
 def add_age(df_data) -> pd.core.frame.DataFrame:
     new_df = df_data.copy()
     random.seed(42)
@@ -134,7 +131,7 @@ return type: tuple
 függvény neve: female_top_score
 '''
 
-
+# 7
 def female_top_score(df_data) -> tuple:
     new_df = df_data.copy()
     female_df = new_df[new_df['gender'] == 'female']
@@ -160,7 +157,7 @@ return type: pandas.core.frame.DataFrame
 függvény neve: add_grade
 '''
 
-
+# 8
 def add_grade(df_data) -> pd.core.frame.DataFrame:
     def calculate_grade(score):
         percentage = score / 300 * 100
@@ -196,7 +193,7 @@ return type: matplotlib.figure.Figure
 függvény neve: math_bar_plot
 '''
 
-
+# 9
 def math_bar_plot(df_data) -> plt.Figure:
     new_df = df_data.copy()
     fig, ax = plt.subplots()
@@ -223,6 +220,8 @@ Egy példa a kimenetre: fig
 return type: matplotlib.figure.Figure
 függvény neve: writing_hist
 '''
+
+# 10
 def writing_hist(df_data) -> plt.Figure:
     new_df = df_data.copy()
     writing_scores = new_df['writing score'].value_counts()
@@ -249,6 +248,8 @@ Egy példa a kimenetre: fig
 return type: matplotlib.figure.Figure
 függvény neve: ethnicity_pie_chart
 '''
+
+# 11
 def ethnicity_pie_chart(df_data) -> plt.Figure:
     new_df = df_data.copy()
     students_by_race = new_df['race/ethnicity'].value_counts()
