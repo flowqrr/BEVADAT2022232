@@ -23,7 +23,7 @@ def csv_to_df(csv_file: str) -> pd.core.frame.DataFrame:
     return df
 
 
-df = csv_to_df('StudentsPerformance.csv')
+# df = csv_to_df('StudentsPerformance.csv')
 # print(df)
 
 '''
@@ -222,14 +222,13 @@ függvény neve: writing_hist
 '''
 
 # 10
-def writing_hist(df_data) -> plt.Figure:
+def writing_hist(df_data): # -> plt.Figure:
     new_df = df_data.copy()
-    writing_scores = new_df['writing score'].value_counts()
     fig, ax = plt.subplots()
+    ax.hist(new_df['writing score'])
     ax.set_title('Distribution of Writing Scores')
     ax.set_xlabel('Writing Score')
     ax.set_ylabel('Number of Students')
-    ax.hist(writing_scores)
     return fig
 
 # plot = writing_hist(df)
@@ -250,9 +249,10 @@ függvény neve: ethnicity_pie_chart
 '''
 
 # 11
-def ethnicity_pie_chart(df_data) -> plt.Figure:
-    ethnicity_counts = df_data['race/ethnicity'].value_counts()
-    total_count = df_data.shape[0]
+def ethnicity_pie_chart(df_data): # -> plt.Figure:
+    new_df = df_data.copy()
+    ethnicity_counts = new_df['race/ethnicity'].value_counts()
+    total_count = new_df.shape[0]
     ethnicity_percents = [count / total_count * 100 for count in ethnicity_counts.values]
     fig, ax = plt.subplots()
     ax.pie(ethnicity_percents, labels=ethnicity_counts.index.tolist(), autopct='%1.1f%%')
