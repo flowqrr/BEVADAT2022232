@@ -251,11 +251,12 @@ függvény neve: ethnicity_pie_chart
 
 # 11
 def ethnicity_pie_chart(df_data) -> plt.Figure:
-    new_df = df_data.copy()
-    students_by_race = new_df['race/ethnicity'].value_counts()
-    ethnicity_percentages = students_by_race * 100 / students_by_race.sum()
+    ethnicity_counts = df_data['race/ethnicity'].value_counts()
+    total_count = df_data.shape[0]
+    ethnicity_percents = [count / total_count * 100 for count in ethnicity_counts.values]
     fig, ax = plt.subplots()
-    ax.pie(ethnicity_percentages, labels=ethnicity_percentages.index.tolist(), autopct='%1.1f%%')
+    ax.pie(ethnicity_percents, labels=ethnicity_counts.index.tolist(), autopct='%1.1f%%')
+    ax.set_title('Proportion of Students by Race/Ethnicity')
     return fig
 
 # plot = ethnicity_pie_chart(df)
