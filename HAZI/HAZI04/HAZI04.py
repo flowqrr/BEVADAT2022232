@@ -115,8 +115,7 @@ függvény neve: add_age
 def add_age(df_data) -> pd.core.frame.DataFrame:
     new_df = df_data.copy()
     random.seed(42)
-    ages = [random.randint(18, 66) for _ in range(len(df_data))]
-    new_df['age'] = ages
+    new_df['age'] = np.random.randint(low=18, high=67, size=len(df_data))
     return new_df
 
 
