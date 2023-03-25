@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import random
 
 '''
 FONTOS: Az első feladatáltal visszaadott DataFrame-et kell használni a további feladatokhoz. 
@@ -114,7 +113,7 @@ függvény neve: add_age
 # 6
 def add_age(df_data) -> pd.core.frame.DataFrame:
     new_df = df_data.copy()
-    random.seed(42)
+    np.random.seed(42)
     new_df['age'] = np.random.randint(low=18, high=67, size=len(df_data))
     return new_df
 
