@@ -59,7 +59,11 @@ class KNNClassifier:
         sns.heatmap(conf_matrix, annot=True)
 
     def best_k(self) -> Tuple[int, float]:
-        pass
+        accuracies = []
+        for i in range(20):
+            KNNClassifier(i, self.test_split_ratio)
+            accuracies.append((i, round(KNNClassifier.accuracy(self), 2)))
+        return max(accuracies)
 
 
 # x, y = KNNClassifier.load_csv(csv_path)
