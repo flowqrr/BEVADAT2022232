@@ -1,10 +1,7 @@
-# import numpy as np
 import pandas as pd
 from typing import Tuple
-from scipy.stats import mode
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
-# csv_path = 'iris.csv'
 
 class KNNClassifier:
     def __init__(self, k: int, test_split_ratio: float):
@@ -65,31 +62,5 @@ class KNNClassifier:
             accuracies.append((i, round(KNNClassifier.accuracy(self), 2)))
         return max(accuracies)
 
-
-# x, y = KNNClassifier.load_csv(csv_path)
-
-# # region PREPARATION
-#
-# np.mean(x,axis=0),np.var(x,axis=0)
-# np.nanmean(x,axis=0),np.nanvar(x,axis=0)
-# x[np.isnan(x)] = 3.5
-# print(x.shape)
-# np.mean(x,axis=0),np.var(x,axis=0)
-# (x > 13.0).sum(), (x < 0.0).sum()
-# print(x[np.where(np.logical_or(x > 13.0,x < 0.0))])
-# less_than = np.where(x < 0.0)
-# higher_than = np.where(x > 13.0)
-# print(less_than,higher_than)
-#
-# y = np.delete(y,np.where(x < 0.0)[0],axis=0)
-# y = np.delete(y,np.where(x > 13.0)[0],axis=0)
-# x = np.delete(x,np.where(x < 0.0)[0],axis=0)
-# x = np.delete(x,np.where(x > 13.0)[0],axis=0)
-#
-# print(x.shape,y.shape)
-#
-# # endregion
-
-# knn = KNNClassifier(3, 0.2)
 
 

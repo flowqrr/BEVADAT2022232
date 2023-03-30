@@ -1,0 +1,23 @@
+A KNNClassifier class egy K-Nearest Neighbors (KNN) osztályozó modellt valósít meg.
+
+A tanításhoz egy CSV fileból tudja betölteni az adatokat a load_csv() függvénnyel,
+amiben az x tartalmazza a bemeneti adatokat (dataframe),
+az y pedig a lehetséges címkék (target változók) sorozata (Series).
+
+A train_set_split() függvénnyel két részre osztjuk az adathalmazt a tesztelési arány alapján
+(ez a train_test_split változóban van eltárolva), hogy legyen mivel
+tesztelni, tehát az adatok csak egy részét használjuk tanulásra. Ez azért kell, hogy jól működjön
+olyan adatokon is amivel még nem találkozott, mert ha az összeset tanításra használnánk,
+akkor az előrejelzések túloptimisták lehetnének. A két adathalmazt osztályszintű változókba mentjük.
+
+Az euclidean() függvény az, amivel kiszámítjuk az adott teszt adatpont (element_of_x)
+és az összes tanuló adatpont közötti euklideszi távolságot (mert vektorokról van szó).
+Egy Series objektumot kapunk vissza, aminek az elemei ezek a távolságok (számértékek).
+
+Az accuracy() függvény számítja ki az osztályozás pontosságát.
+Ezt a helyes eredmények és az összes tesztpont százalékos arányával fejezzük ki.
+
+A confusion_matrix() megjeleníti konfúziós mátrixot (egy heatmap-pel),
+ez a modell előrejelzésének helyességét mutatja az egyes osztályokra.
+A mátrixban egy adott cella értéke azt jelöli, hogy a modell hányszor hozta helyesen
+az adott valós osztályba tartozó mintát, vagy hányszor tévesztett el.
