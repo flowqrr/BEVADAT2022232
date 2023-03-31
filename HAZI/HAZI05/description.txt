@@ -18,6 +18,6 @@ Az accuracy() függvény számítja ki az osztályozás pontosságát.
 Ezt a helyes eredmények és az összes tesztpont százalékos arányával fejezzük ki.
 
 A confusion_matrix() megjeleníti konfúziós mátrixot (egy heatmap-pel),
-ez a modell előrejelzésének helyességét mutatja az egyes osztályokra.
+ez az előrejelzések helyességét mutatja az egyes osztályokra.
 A mátrixban egy adott cella értéke azt jelöli, hogy a modell hányszor hozta helyesen
-az adott valós osztályba tartozó mintát, vagy hányszor tévesztett el.
+az adott osztályba tartozó mintát vagy hányszor rontotta el.
