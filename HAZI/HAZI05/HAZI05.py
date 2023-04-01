@@ -18,11 +18,19 @@ class KNNClassifier:
         return self.k
 
     @staticmethod
-    def load_csv(csv_path: str) -> Tuple[pd.DataFrame, pd.Series]:
-        pd.random.seed(42)
-        dataset = pd.read_csv(csv_path, delimiter=',', header=None)
-        dataset = dataset.sample(frac=1).reset_index(drop=True)
+    def load_csv(path: str,  clean_dataset: bool = False) -> Tuple[pd.DataFrame, pd.DataFrame]:
+        dataset = pd.read_csv(path, delimiter=',', header=None)
+        dataset = dataset.sample(frac=1, random_state=42).reset_index(drop=True)
+
+        if clean_dataset:
+            dataset = dataset.fillna(value=3.5)
+            dataset = dataset.replace('""', 3.5)
+            dataset = dataset.astype(float)
+            mask = (dataset.iloc[:, :4] >= 0) & (dataset.iloc[:, :4] <= 10)
+            dataset = dataset[mask.all(axis=1)].reset_index(drop=True)
+
         x, y = dataset.iloc[:, :4], dataset.iloc[:, -1]
+
         return x, y
 
     def train_set_split(self, features: pd.DataFrame, labels: pd.Series):
@@ -63,4 +71,15 @@ class KNNClassifier:
         return max(accuracies)
 
 
-
+# # region testing
+# csv_path = "datasets/iris.csv"
+# x_test, y_test = KNNClassifier.load_csv(csv_path, True)
+#
+# knn = KNNClassifier(3, 0.2)
+# knn.train_test_split(x_test, y_test)
+# knn.predict(knn.x_test)
+# print(knn.accuracy())
+# knn.confusion_matrix()
+# pyplot.show()
+# print(knn.best_k())
+# # endregion
