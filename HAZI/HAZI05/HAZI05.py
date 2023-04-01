@@ -19,15 +19,9 @@ class KNNClassifier:
         return self.k
 
     @staticmethod
-    def load_csv(csv_path: str, clean_dataset: bool = False) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    def load_csv(csv_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
         dataset = pd.read_csv(csv_path, delimiter=',', header=None)
         dataset = dataset.sample(frac=1, random_state=42).reset_index(drop=True)
-        if clean_dataset:
-            dataset = dataset.fillna(value=3.5)
-            dataset = dataset.replace('""', 3.5)
-            dataset = dataset.astype(float)
-            mask = (dataset.iloc[:, :4] >= 0) & (dataset.iloc[:, :4] <= 10)
-            dataset = dataset[mask.all(axis=1)].reset_index(drop=True)
         x, y = dataset.iloc[:, :4], dataset.iloc[:, -1]
         return x, y
 
