@@ -1,17 +1,22 @@
+from typing import Optional, Tuple
+
 import pandas as pd
-from typing import Tuple
 import seaborn as sns
+from matplotlib import pyplot
 from sklearn.metrics import confusion_matrix
 
 class KNNClassifier:
     def __init__(self, k: int, test_split_ratio: float):
         self.k = k
         self.test_split_ratio = test_split_ratio
-        self.x_train: pd.DataFrame = None
-        self.y_train: pd.DataFrame = None
-        self.x_test: pd.DataFrame = None
-        self.y_test: pd.DataFrame = None
-        self.y_preds: pd.DataFrame = None
+
+        self.x_train: Optional[pd.DataFrame] = None
+        self.y_train: Optional[pd.DataFrame] = None
+
+        self.x_test: Optional[pd.DataFrame] = None
+        self.y_test: Optional[pd.DataFrame] = None
+
+        self.y_preds: Optional[pd.DataFrame] = None
 
     @property
     def k_neighbors(self):
@@ -33,13 +38,13 @@ class KNNClassifier:
 
         return x, y
 
-    def train_set_split(self, features: pd.DataFrame, labels: pd.Series):
+    def train_test_split(self, features: pd.DataFrame, labels: pd.DataFrame):
         test_size = int(len(features) * self.test_split_ratio)
         train_size = len(features) - test_size
-        assert len(features) == test_size + train_size, "Size mismatch!"
+        assert (len(features) == test_size + train_size)
 
         self.x_train, self.y_train = features.iloc[:train_size, :], labels.iloc[:train_size]
-        self.x_test, self.y_test = features.iloc[train_size:train_size + test_size, :],\
+        self.x_test, self.y_test = features.iloc[train_size:train_size + test_size, :], \
             labels.iloc[train_size:train_size + test_size]
 
     def euclidean(self, element_of_x: pd.Series) -> pd.Series:
@@ -51,8 +56,10 @@ class KNNClassifier:
             distances = self.euclidean(x_test.iloc[i])
             distances = pd.DataFrame({'distance': distances, 'label': self.y_train})
             distances = distances.sort_values(by='distance').reset_index(drop=True)
-            label_pred = distances.loc[:self.k - 1, 'label'].mode().values[0]
+
+            label_pred = distances.loc[:self.k-1, 'label'].mode().values[0]
             labels_pred.append(label_pred)
+
         self.y_preds = pd.Series(labels_pred, dtype='int32').values
 
     def accuracy(self) -> float:
@@ -65,10 +72,13 @@ class KNNClassifier:
 
     def best_k(self) -> Tuple[int, float]:
         accuracies = []
-        for i in range(20):
-            KNNClassifier(i, self.test_split_ratio)
-            accuracies.append((i, round(KNNClassifier.accuracy(self), 2)))
-        return max(accuracies)
+        for i in range(1, 21):
+            self.k = i
+            self.predict(self.x_test)
+
+            accuracies.append((i, self.accuracy()))
+        best_k, best_accuracy = max(accuracies, key=lambda x: x[1])
+        return best_k, best_accuracy
 
 
 # # region testing
