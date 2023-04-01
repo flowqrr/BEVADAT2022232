@@ -2,20 +2,16 @@ from typing import Optional, Tuple
 
 import pandas as pd
 import seaborn as sns
-from matplotlib import pyplot
 from sklearn.metrics import confusion_matrix
 
 class KNNClassifier:
     def __init__(self, k: int, test_split_ratio: float):
         self.k = k
         self.test_split_ratio = test_split_ratio
-
         self.x_train: Optional[pd.DataFrame] = None
         self.y_train: Optional[pd.DataFrame] = None
-
         self.x_test: Optional[pd.DataFrame] = None
         self.y_test: Optional[pd.DataFrame] = None
-
         self.y_preds: Optional[pd.DataFrame] = None
 
     @property
@@ -23,26 +19,22 @@ class KNNClassifier:
         return self.k
 
     @staticmethod
-    def load_csv(path: str,  clean_dataset: bool = False) -> Tuple[pd.DataFrame, pd.DataFrame]:
-        dataset = pd.read_csv(path, delimiter=',', header=None)
+    def load_csv(csv_path: str, clean_dataset: bool = False) -> Tuple[pd.DataFrame, pd.DataFrame]:
+        dataset = pd.read_csv(csv_path, delimiter=',', header=None)
         dataset = dataset.sample(frac=1, random_state=42).reset_index(drop=True)
-
         if clean_dataset:
             dataset = dataset.fillna(value=3.5)
             dataset = dataset.replace('""', 3.5)
             dataset = dataset.astype(float)
             mask = (dataset.iloc[:, :4] >= 0) & (dataset.iloc[:, :4] <= 10)
             dataset = dataset[mask.all(axis=1)].reset_index(drop=True)
-
         x, y = dataset.iloc[:, :4], dataset.iloc[:, -1]
-
         return x, y
 
     def train_test_split(self, features: pd.DataFrame, labels: pd.DataFrame):
         test_size = int(len(features) * self.test_split_ratio)
         train_size = len(features) - test_size
         assert (len(features) == test_size + train_size)
-
         self.x_train, self.y_train = features.iloc[:train_size, :], labels.iloc[:train_size]
         self.x_test, self.y_test = features.iloc[train_size:train_size + test_size, :], \
             labels.iloc[train_size:train_size + test_size]
@@ -56,7 +48,6 @@ class KNNClassifier:
             distances = self.euclidean(x_test.iloc[i])
             distances = pd.DataFrame({'distance': distances, 'label': self.y_train})
             distances = distances.sort_values(by='distance').reset_index(drop=True)
-
             label_pred = distances.loc[:self.k-1, 'label'].mode().values[0]
             labels_pred.append(label_pred)
 
@@ -75,21 +66,6 @@ class KNNClassifier:
         for i in range(1, 21):
             self.k = i
             self.predict(self.x_test)
-
             accuracies.append((i, self.accuracy()))
         best_k, best_accuracy = max(accuracies, key=lambda x: x[1])
         return best_k, best_accuracy
-
-
-# # region testing
-# csv_path = "datasets/iris.csv"
-# x_test, y_test = KNNClassifier.load_csv(csv_path, True)
-#
-# knn = KNNClassifier(3, 0.2)
-# knn.train_test_split(x_test, y_test)
-# knn.predict(knn.x_test)
-# print(knn.accuracy())
-# knn.confusion_matrix()
-# pyplot.show()
-# print(knn.best_k())
-# # endregion
