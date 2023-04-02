@@ -2,6 +2,7 @@ from typing import Optional, Tuple
 
 import pandas as pd
 import seaborn as sns
+from matplotlib import pyplot
 from sklearn.metrics import confusion_matrix
 
 class KNNClassifier:
@@ -20,9 +21,9 @@ class KNNClassifier:
 
     @staticmethod
     def load_csv(csv_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
-        dataset = pd.read_csv(csv_path, delimiter=',', header=None)
+        dataset = pd.read_csv(csv_path, delimiter=',')
         dataset = dataset.sample(frac=1, random_state=42).reset_index(drop=True)
-        x, y = dataset.iloc[:, :4], dataset.iloc[:, -1]
+        x, y = dataset.iloc[:, :-1], dataset.iloc[:, -1]
         return x, y
 
     def train_test_split(self, features: pd.DataFrame, labels: pd.DataFrame):
@@ -63,3 +64,17 @@ class KNNClassifier:
             accuracies.append((i, self.accuracy()))
         best_k, best_accuracy = max(accuracies, key=lambda x: x[1])
         return best_k, best_accuracy
+
+# # region test
+# csv_path = "datasets/diabetes.csv"
+# x_test, y_test = KNNClassifier.load_csv(csv_path)
+# print(x_test)
+#
+# knn = KNNClassifier(3, 0.2)
+# knn.train_test_split(x_test, y_test)
+# knn.predict(knn.x_test)
+# print(knn.accuracy())
+# knn.confusion_matrix()
+# pyplot.show()
+# print(knn.best_k())
+# # endregion
