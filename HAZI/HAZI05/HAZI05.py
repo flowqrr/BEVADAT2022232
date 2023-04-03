@@ -64,7 +64,7 @@ class KNNClassifier:
             self.predict(self.x_test)
             accuracies.append((i, self.accuracy()))
         best_k, best_accuracy = max(accuracies, key=lambda x: x[1])
-        return best_k, best_accuracy
+        return best_k, round(best_accuracy, 2)
 
 # # region test
 # csv_path = "datasets/diabetes.csv"
