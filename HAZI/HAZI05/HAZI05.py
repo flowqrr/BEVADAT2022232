@@ -1,8 +1,9 @@
 from typing import Optional, Tuple
 
+import numpy as np
 import pandas as pd
 import seaborn as sns
-from matplotlib import pyplot
+import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 
 class KNNClassifier:
@@ -52,9 +53,9 @@ class KNNClassifier:
         true_positive = (self.y_test == self.y_preds).sum()
         return true_positive / len(self.y_test) * 100
 
-    def confusion_matrix(self):
+    def confusion_matrix(self) -> np.ndarray:
         conf_matrix = confusion_matrix(self.y_test, self.y_preds)
-        sns.heatmap(conf_matrix, annot=True)
+        return conf_matrix
 
     def best_k(self) -> Tuple[int, float]:
         accuracies = []
@@ -69,12 +70,12 @@ class KNNClassifier:
 # csv_path = "datasets/diabetes.csv"
 # x_test, y_test = KNNClassifier.load_csv(csv_path)
 # print(x_test)
-#
 # knn = KNNClassifier(3, 0.2)
 # knn.train_test_split(x_test, y_test)
 # knn.predict(knn.x_test)
 # print(knn.accuracy())
-# knn.confusion_matrix()
-# pyplot.show()
+# matrix = knn.confusion_matrix()
+# sns.heatmap(matrix, annot=True)
+# plt.show()
 # print(knn.best_k())
 # # endregion
