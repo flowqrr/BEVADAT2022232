@@ -59,3 +59,12 @@ class NJCleaner:
     def save_first_60k(self, csv_save_path: str) -> pd.DataFrame:
         self.data[:60000].to_csv(csv_save_path, index=False)
         return self.data
+
+    def prep_df(self, csv_save_path: str = 'data/NJ.csv'):
+        self.order_by_scheduled_time()
+        self.drop_columns_and_nan()
+        self.convert_date_to_day()
+        self.convert_scheduled_time_to_part_of_the_day()
+        self.convert_delay()
+        self.drop_unnecessary_columns()
+        self.save_first_60k(csv_save_path)
