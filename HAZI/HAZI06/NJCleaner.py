@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 class NJCleaner:
     def __init__(self, csv_path):
         self.data = pd.read_csv(csv_path)
@@ -43,14 +44,9 @@ class NJCleaner:
         return self.data
 
     def convert_delay(self) -> pd.DataFrame:
-        def calculate_delay(minutes):
-            if 0 <= minutes <  5:
-                return 0
-            elif 5 <= minutes:
-                return 1
-
-        self.data['delay'] = self.data['delay_minutes'].apply(lambda x: calculate_delay(x))
-        return self.data
+        delay_df = self.data.copy()
+        delay_df['delay'] = (delay_df['delay_minutes'] >= 5).astype(int)
+        return delay_df
 
     def drop_unnecessary_columns(self) -> pd.DataFrame:
         self.data = self.data.drop(['train_id', 'scheduled_time', 'actual_time', 'delay_minutes'], axis=1)
@@ -68,3 +64,7 @@ class NJCleaner:
         self.convert_delay()
         self.drop_unnecessary_columns()
         self.save_first_60k(csv_save_path)
+
+
+nj_cleaner = NJCleaner("datasets/NJ_Transit+Amtrak.csv")
+nj_cleaner.prep_df("datasets/NJ.csv")
