@@ -52,18 +52,18 @@ class NJCleaner:
         self.data = self.data.drop(['train_id', 'scheduled_time', 'actual_time', 'delay_minutes'], axis=1)
         return self.data
 
-    def save_first_60k(self, csv_save_path: str) -> pd.DataFrame:
-        self.data[:60000].to_csv(csv_save_path, index=False)
+    def save_first_60k(self, path: str) -> pd.DataFrame:
+        self.data[:60000].to_csv(path, index=False)
         return self.data
 
-    def prep_df(self, csv_save_path: str = 'data/NJ.csv'):
+    def prep_df(self, path: str = 'data/NJ.csv'):
         self.order_by_scheduled_time()
         self.drop_columns_and_nan()
         self.convert_date_to_day()
         self.convert_scheduled_time_to_part_of_the_day()
         self.convert_delay()
         self.drop_unnecessary_columns()
-        self.save_first_60k(csv_save_path)
+        self.save_first_60k(path)
 
 
 nj_cleaner = NJCleaner("datasets/NJ_Transit+Amtrak.csv")
