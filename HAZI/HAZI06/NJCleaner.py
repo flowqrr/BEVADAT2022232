@@ -65,6 +65,3 @@ class NJCleaner:
         self.drop_unnecessary_columns()
         self.save_first_60k(path)
 
-
-nj_cleaner = NJCleaner("datasets/NJ_Transit+Amtrak.csv")
-nj_cleaner.prep_df("datasets/NJ.csv")

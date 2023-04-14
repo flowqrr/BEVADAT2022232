@@ -3,6 +3,8 @@ import pandas as pd
 
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+
+
 class Node():
     def __init__(self, feature_index=None, threshold=None, left=None, right=None, info_gain=None, value=None):
         ''' constructor '''
@@ -16,6 +18,7 @@ class Node():
 
         # for leaf node
         self.value = value
+
 
 class DecisionTreeClassifier():
     def __init__(self, min_samples_split=2, max_depth=2):
@@ -133,16 +136,18 @@ class DecisionTreeClassifier():
             return self.make_prediction(x, tree.left)
         else:
             return self.make_prediction(x, tree.right)
+
+
 # %%
 
 col_name = ['sepal_lenght', 'sepal_width', 'petal_length', 'petal_width', 'type']
-data = pd.read_csv("data/Iris.csv",skiprows=1, header=None, names=col_name)
-#%%
+data = pd.read_csv("data/Iris.csv", skiprows=1, header=None, names=col_name)
+# %%
 X = data.iloc[:, :-1].values
-Y = data.iloc[:, -1].values.reshape(-1,1)
-X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size=.2, random_state=41)
+Y = data.iloc[:, -1].values.reshape(-1, 1)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=.2, random_state=41)
 
-#%%
+# %%
 classifier = DecisionTreeClassifier(min_samples_split=3, max_depth=3)
 classifier.fit(X_train, Y_train)
 
