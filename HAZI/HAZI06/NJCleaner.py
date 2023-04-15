@@ -27,21 +27,24 @@ class NJCleaner:
          20:00-23:59 -- night
          0:00-3:59 -- late_night """
 
-        def part_of_the_day(hour):
-            if 4 <= hour < 8:
+        def part_of_the_day(time):
+            hour = int(time.split(' ')[1].split(':')[0])
+            if 4 <= hour <= 7:
                 return 'early_morning'
-            elif 8 <= hour < 12:
+            elif 8 <= hour <= 11:
                 return 'morning'
-            elif 12 <= hour < 16:
+            elif 12 <= hour <= 15:
                 return 'afternoon'
-            elif 16 <= hour < 20:
+            elif 16 <= hour <= 19:
                 return 'evening'
-            elif hour >= 20 or hour < 4:
+            elif 20 <= hour <= 23:
                 return 'night'
+            else:
+                return 'late_night'
 
-        self.data['part_of_the_day'] = self.data['scheduled_time'].apply(lambda x: part_of_the_day(x.hour))
-        self.data = self.data.drop('scheduled_time', axis=1)
-        return self.data
+        part_of_day_df = self.data.copy()
+        part_of_day_df['part_of_the_day'] = part_of_day_df['scheduled_time'].apply(part_of_the_day)
+        return part_of_day_df.drop('scheduled_time', axis=1)
 
     def convert_delay(self) -> pd.DataFrame:
         delay_df = self.data.copy()
@@ -49,8 +52,7 @@ class NJCleaner:
         return delay_df
 
     def drop_unnecessary_columns(self) -> pd.DataFrame:
-        self.data = self.data.drop(['train_id', 'scheduled_time', 'actual_time', 'delay_minutes'], axis=1)
-        return self.data
+        return self.data.drop(['train_id', 'actual_time', 'delay_minutes'], axis=1)
 
     def save_first_60k(self, path: str) -> pd.DataFrame:
         self.data[:60000].to_csv(path, index=False)
