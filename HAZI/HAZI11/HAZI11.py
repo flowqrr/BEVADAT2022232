@@ -85,27 +85,27 @@ def model_fit(model, epochs, train_images, train_labels):
     return model
 
 
-# region test
-
-train_images, train_labels, test_images, test_labels = cifar100_data()
-
-plt.figure(figsize=(10, 10))
-for i in range(25):
-    plt.subplot(5, 5, i + 1)
-    plt.xticks([])
-    plt.yticks([])
-    plt.grid(False)
-    plt.imshow(train_images[i], cmap=plt.cm.binary)
-plt.show()
-
-print(train_images.shape)
-
-model = cifar100_model()
-model = model_compile(model)
-model = model_fit(model, 3, train_images, train_labels)
-
-test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
-print('\nloss:', test_loss)
-print('\naccuracy:', test_acc)
-
-# endregion
+# # region test
+#
+# train_images, train_labels, test_images, test_labels = cifar100_data()
+#
+# plt.figure(figsize=(10, 10))
+# for i in range(25):
+#     plt.subplot(5, 5, i + 1)
+#     plt.xticks([])
+#     plt.yticks([])
+#     plt.grid(False)
+#     plt.imshow(train_images[i], cmap=plt.cm.binary)
+# plt.show()
+#
+# print(train_images.shape)
+#
+# model = cifar100_model()
+# model = model_compile(model)
+# model = model_fit(model, 3, train_images, train_labels)
+#
+# test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
+# print('\nloss:', test_loss)
+# print('\naccuracy:', test_acc)
+#
+# # endregion
