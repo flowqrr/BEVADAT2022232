@@ -85,6 +85,20 @@ def model_fit(model, epochs, train_images, train_labels):
     return model
 
 
+'''
+Készíts egy metódust, ami a bemeneti hálót kiértékeli a teszt adatokon.
+
+Egy példa a bemenetre: model, test_images, test_labels
+Egy példa a kimenetre: test_loss, test_acc
+return type: float, float
+függvény neve: model_evaluate
+'''
+
+
+def model_evaluate(model, test_images, test_labels):
+    test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)
+    return test_loss, test_acc
+
 # # region test
 #
 # train_images, train_labels, test_images, test_labels = cifar100_data()
